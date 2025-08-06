@@ -1,4 +1,4 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Xxtan31/Ata/main/cracked.txt", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/duc1820082-dev/Alen/refs/heads/main/Cmm.txt", true))()
 
 --[[
 	crack by Van Duc and Giang
