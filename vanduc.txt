@@ -202,7 +202,7 @@ local HidePart = Instance.new("Part")
 
 
 	local Window = Rayfield:CreateWindow({
-		Name = "Project [The Rake]",
+		Name = "Con Cặc",
 		LoadingTitle = "Allain",
 		LoadingSubtitle = "giang Hub",
 		ConfigurationSaving = {
@@ -211,3 +211,7 @@ local HidePart = Instance.new("Part")
 			FileName = "Project"
 		}
 	})
+local PlayerTab = Window:CreateTab("Player", 11252440515)
+	local ClientTab = Window:CreateTab("Troll", 4483345998)
+	local ExploitsTab = Window:CreateTab("SCRIPT", 11252440817)
+	local SettingsTab = Window:CreateTab("Settings", 11252440305)
