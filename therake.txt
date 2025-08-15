@@ -452,7 +452,7 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateToggle({
-		Name = "Rake Chams",
+		Name = "định vị Rake",
 		CurrentValue = false,
 		Flag = "RakeChams",
 		Callback = function(state)
@@ -477,7 +477,7 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateToggle({
-		Name = "Player ESP",
+		Name = "định vị người chơi",
 		CurrentValue = false,
 		Flag = "PlrEsp",
 		Callback = function(state)
@@ -505,7 +505,7 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateToggle({
-		Name = "Show Distance Travelled",
+		Name = "số bước chân",
 		CurrentValue = false,
 		Flag = "ShowDistanceTravelled",
 		Callback = function(state)
@@ -514,7 +514,7 @@ if game.GameId == 847722000 then
 	})
 
 	ExploitsTab:CreateButton({
-		Name = "Bring Scraps",
+		Name = "hút kim loại ",
 		Callback = function()
 			for i,v in pairs(ClonedService("Workspace").Filter.ScrapSpawns:GetDescendants()) do
 				if v.Name:lower() == "scrap" then
@@ -525,7 +525,7 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateToggle({
-		Name = "Flare Gun ESP",
+		Name = "định vị súng pháo",
 		CurrentValue = false,
 		Flag = "FlareGunESP",
 		Callback = function(state)
@@ -546,7 +546,7 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateToggle({
-		Name = "SupplyDrop ESP",
+		Name = "định vị Thính",
 		CurrentValue = false,
 		Flag = "SupplyDropESP",
 		Callback = function(state)
@@ -570,12 +570,12 @@ if game.GameId == 847722000 then
 					else
 						ClonedService("Workspace"):FindFirstChild("FlareGunPickUp"):SetAttribute("FlareGunESP",true)
 						local esp = Drawing.new("Text")
-						esp.Text = "Flare Gun"
+						esp.Text = "súng pháo "
 						esp.Color = Color3.fromRGB(0, 225, 255)
 						esp.Outline = false
 						esp.Center = true
 						esp.Font = 2
-						esp.Size = 12
+						esp.Size = 8
 						esp.Visible = true
 						ClonedService("RunService").Heartbeat:Connect(function()
 							if AllowRunService == true then
@@ -641,7 +641,7 @@ if game.GameId == 847722000 then
 							RakeChams.OutlineColor = Color3.fromRGB(255,255,255)
 							RakeChams.FillTransparency = .3
 							RakeChams.OutlineTransparency =.9
-							RakeChams.Name = "RakeChams" -- add chams
+							RakeChams.Name = "Rake" -- add chams
 						end
 					end
 				end
@@ -667,7 +667,7 @@ if game.GameId == 847722000 then
 													local cam = workspace.CurrentCamera
 													local Pos,OnScreen = cam:WorldToViewportPoint(v.Head.Position)
 													if OnScreen then
-														ESP.Text = tostring(v)..", Health : "tostring(v.Monster.Health)
+														ESP.Text = rake
 														ESP.Visible = true
 														ESP.Position = Vector2.new(Pos.X,Pos.Y)
 													else
@@ -794,7 +794,7 @@ if game.GameId == 847722000 then
 							ESP.Outline = false
 							ESP.Size = 12
 							ESP.Font = 2
-							ESP.Text = "Supply Drop"
+							ESP.Text = " thính "
 							ESP.Visible = true
 							ESP.Center = true
 							ClonedService("RunService").Heartbeat:Connect(function()
@@ -839,26 +839,26 @@ if game.GameId == 847722000 then
 
 
 	local Locations = {
-		["Power_Station"] = {
+		["điện"] = {
 			["Position"] = Vector3.new(-281.6848449707031, 21.50823974609375, -212.7472686767578),
 			["hasESP"] = false,
 		},
-		["Safe_House"] = {
+		["nhà an toàn"] = {
 			["Position"] = Vector3.new(-363.491, 16.8744, 70.3037),
 			["hasESP"] = false,
 		},
-		["Base_Camp"] = {
+		["Trại"] = {
 			["Position"] = Vector3.new(-70.7132568359375, 17.61418914794922, 209.00674438476562),
 			["hasESP"] = false,
 		},
-		["Shop"] = {
+		[" cửa hàng "] = {
 			["Position"] = Vector3.new(-25.1567, 17.2076, -258.362),
 			["hasESP"] = false
 		}
 	}
 
 	ClientTab:CreateToggle({
-		Name = "Location ESP",
+		Name = "định vị khu vực",
 		CurrentValue = false,
 		Flag = "LocationESP",
 		Callback = function(state)
@@ -896,7 +896,7 @@ if game.GameId == 847722000 then
 									local Pos,OnScreen = cam:WorldToViewportPoint(v.Position)
 									if OnScreen then
 										ESP.Visible = true
-										ESP.Text = "[LOCATION] "..tostring(i)
+										ESP.Text = "😳"..tostring(i)
 										ESP.Position = Vector2.new(Pos.X,Pos.Y)
 									else
 										ESP.Visible = false
@@ -927,10 +927,10 @@ if game.GameId == 847722000 then
 							local ScrapESP = Drawing.new("Text")
 							ScrapESP.Center = true
 							ScrapESP.Outline = false
-							ScrapESP.Color = Color3.fromRGB(77, 35, 1)
+							ScrapESP.Color = Color3.fromRGB(255, 0, 0)
 							ScrapESP.Size = 12
 							ScrapESP.Font = 2
-							ScrapESP.Text = "Scrap"..", Points "..tostring(v.Parent.PointsVal.Value)..", Level "..tostring(v.Parent.LevelVal.Value)
+							ScrapESP.Text = "kim loại"..", tiền "..tostring(v.Parent.PointsVal.Value)..", Level "..tostring(v.Parent.LevelVal.Value)
 							ScrapESP.Visible = false
 							ClonedService("RunService").Heartbeat:Connect(function()
 								if AllowRunService == true then
@@ -979,7 +979,7 @@ if game.GameId == 847722000 then
 	end)
 
 	ClientTab:CreateToggle({
-		Name = "Scrap ESP",
+		Name = "định vị sắt",
 		CurrentValue = false,
 		Flag = "ScrapESP",
 		Callback = function(state)
@@ -1030,7 +1030,7 @@ if game.GameId == 847722000 then
 	})
 
 	ExploitsTab:CreateToggle({
-		Name = "Hide",
+		Name = "ẩn",
 		CurrentValue = false,
 		Flag = "Hide",
 		Callback = function(state)
@@ -1073,7 +1073,7 @@ if game.GameId == 847722000 then
 	})
 
 	PlayerTab:CreateToggle({
-		Name = "No Fall Damage",
+		Name = "ko lỗi dame",
 		CurrentValue = false,
 		Flag = "NoFallDamage",
 		Callback = function(state)
@@ -1082,7 +1082,7 @@ if game.GameId == 847722000 then
 	})
 
 	PlayerTab:CreateSlider({
-		Name = "Field Of View",
+		Name = "góc nhìn rộng",
 		Range = {0, 120},
 		Increment = 1,
 		CurrentValue = 70,
@@ -1093,7 +1093,7 @@ if game.GameId == 847722000 then
 	})
 
 	PlayerTab:CreateToggle({
-		Name = "Toggle FOV",
+		Name = "FOV",
 		CurrentValue = false,
 		Flag = "tglFOV",
 		Callback = function(state)
@@ -1102,7 +1102,7 @@ if game.GameId == 847722000 then
 	})
 	
 	PlayerTab:CreateSlider({
-		Name = "WalkSpeed",
+		Name = "Speed",
 		Range = {0, 30},
 		Increment = 1,
 		CurrentValue = 16,
@@ -1113,7 +1113,7 @@ if game.GameId == 847722000 then
 	})
 
 	PlayerTab:CreateToggle({
-		Name = "Toggle WalkSpeed",
+		Name = "Speed",
 		CurrentValue = false,
 		Flag = "tglSpeed",
 		Callback = function(state)
