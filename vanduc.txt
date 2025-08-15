@@ -215,3 +215,30 @@ local PlayerTab = Window:CreateTab("Player", 11252440515)
 	local ClientTab = Window:CreateTab("Troll", 4483345998)
 	local ExploitsTab = Window:CreateTab("SCRIPT", 11252440817)
 	local SettingsTab = Window:CreateTab("Settings", 11252440305)
+ClientTab:CreateToggle({
+		Name = "Player ESP",
+		CurrentValue = false,
+		Flag = "PlrEsp",
+		Callback = function(state)
+			_G.PlayerESP = state
+			if _G.PlayerESP == true then
+				repeat wait()
+
+				until _G.PlayerESP == false
+				for i,v in pairs(ClonedService("Players"):GetPlayers()) do
+					pcall(function()
+						if not v.Character then
+						else
+							if v.Character:GetAttribute("PlayerESP") == true then
+								v.Character:SetAttribute("PlayerESP",false)
+							end
+							if v.Character:FindFirstChild("PlayerChams") then
+								v.Character.PlayerChams:Remove()
+
+							end
+						end
+					end)
+				end
+			end
+		end,
+	})
