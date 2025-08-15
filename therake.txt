@@ -251,9 +251,9 @@ if game.GameId == 847722000 then
 	local SettingsTab = Window:CreateTab("Settings", 11252440305)
 
 	ClientTab:CreateToggle({
-		Name = "FreeCam",
+		Name = "flycam chỉ di chuyển bằng phím hoặc script phím",
 		CurrentValue = false,
-		Flag = "freeCam",
+		Flag = "flyCam chỉ di chuyển bằng phím hoặc script phím",
 		Callback = function(state)
 			_G.FreeCam = state
 			if _G.FreeCam == true then
@@ -306,18 +306,18 @@ if game.GameId == 847722000 then
 	})
 
 	ClientTab:CreateSlider({
-		Name = "FreeCam Speed",
+		Name = " tốc độ bay ",
 		Range = {0.01, 20},
 		Increment = 0.01,
 		CurrentValue = 0.2,
-		Flag = "Speed",
+		Flag = " tốc độ ",
 		Callback = function(Value)
 			_G.FreeCamSpeed = Value
 		end,
 	})
 
 	ClientTab:CreateToggle({
-		Name = "No Fog",
+		Name = "xoá sương m",
 		CurrentValue = false,
 		Flag = "NoFog",
 		Callback = function(state)
@@ -339,7 +339,7 @@ if game.GameId == 847722000 then
 	end)
 
 	ClientTab:CreateButton({
-		Name = "Third Person",
+		Name = "góc nhìn thứ 3",
 		Callback = function()
 			ClonedService("Players").LocalPlayer.Character.RagdollTime.RagdollSwitch.Value = true
 			ClonedService("Players").LocalPlayer.Character.RagdollTime.RagdollSwitch.Value = false
@@ -349,7 +349,7 @@ if game.GameId == 847722000 then
 
 
 	PlayerTab:CreateToggle({
-		Name = "Inf Stamina",
+		Name = "vô hạn năng lượng",
 		CurrentValue = false,
 		Flag = "InfStamina",
 		Callback = function(state)
@@ -371,7 +371,7 @@ if game.GameId == 847722000 then
 	})
 
 	PlayerTab:CreateToggle({
-		Name = "Inf Night Vision",
+		Name = "nhìn trong bóng tối [bị lỗi ]",
 		CurrentValue = false,
 		Flag = "InfNightVision",
 		Callback = function(state)
@@ -390,7 +390,7 @@ if game.GameId == 847722000 then
 	})
 
 	local RakeKillauraToggle = ExploitsTab:CreateToggle({
-		Name = "Rake Killaura",
+		Name = "đánh rake",
 		CurrentValue = false,
 		Flag = "RakeAura",
 		Callback = function(state)
@@ -438,7 +438,7 @@ if game.GameId == 847722000 then
 	-- rake killaura bind
 
 	ExploitsTab:CreateKeybind({
-		Name = "Toggle Killaura",
+		Name = "bật / tắt Killaura bằng phím R ",
 		CurrentKeybind = "R",
 		HoldToInteract = false,
 		Flag = "KillAuraKeybind",
