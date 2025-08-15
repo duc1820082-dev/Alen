@@ -1142,7 +1142,7 @@ if game.GameId == 847722000 then
 	end
 
 	ExploitsTab:CreateToggle({
-		Name = "Insta Open SupplyDrop",
+		Name = "mở nhanh",
 		CurrentValue = false,
 		Flag = "InstaOpenSupplyDrop",
 		Callback = function(state)
@@ -1201,7 +1201,7 @@ if game.GameId == 847722000 then
 	end
 
 	local RakeTargetCounter = ExploitsTab:CreateLabel("Rake's Target : ")
-	local TimeUntilDayCounter = ExploitsTab:CreateLabel("Time Until Day : ")
+	local TimeUntilDayCounter = ExploitsTab:CreateLabel("concac : ")
 
 	-- update time until day label
 
