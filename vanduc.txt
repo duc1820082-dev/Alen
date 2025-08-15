@@ -207,7 +207,7 @@ local HidePart = Instance.new("Part")
 		LoadingSubtitle = "giang Hub",
 		ConfigurationSaving = {
 			Enabled = true,
-			FolderName = "ProjectTheRake",
+			FolderName = "lon",
 			FileName = "Project"
 		}
 	})
@@ -223,5 +223,7 @@ ClientTab:CreateToggle({
 			_G.FreeCam = state
 			if _G.FreeCam == true then
 				pcall(function()
+FreeCamPart.CFrame = ClonedService("Players").LocalPlayer.Character.Head.CFrame
+				end)
 
 	
