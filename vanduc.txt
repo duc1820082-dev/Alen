@@ -182,13 +182,28 @@ local Main = Window:AddTab({
 	Icon = "rbxassetid://11963373994"
 })
 
-Window:AddSection({ Name = "Non Interactable", Tab = Player }) 
+Window:AddSection({ Name = "Non Interactable", Tab = Player }) 	Title = "Toggle",
+	Description = "Switching",
+	Tab = Player,
+	Callback = function(Boolean) 
+		warn(Boolean);
+	end,
+}) 
+
+Window:AddInput({
+	Title = "Input",
+	Description = "Typing",
+	Tab = Player,
+	Callback = function(Text) 
+		warn(Text);
+	end,
+}) 
 
 
 Window:AddParagraph({
 	Title = "Paragraph",
 	Description = "Insert any important text here.",
-	Tab = Phayer
+	Tab = Player
 }) 
 
 Window:AddSection({ Name = "Interactable", Tab = Player }) 
