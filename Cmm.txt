@@ -38,14 +38,14 @@ TextLabel.TextColor3 = Color3.fromRGB(255, 165, 0) -- Orange
 TextLabel.TextScaled = true
 TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 TextLabel.TextYAlignment = Enum.TextYAlignment.Top
-TextLabel.Text = "Cracked By Ata"
+TextLabel.Text = "con cặc"
 TextLabel.Parent = NotificationFrame
 
 -- Create the progress bar
 local ProgressBar = Instance.new("Frame")
 ProgressBar.Size = UDim2.new(0.9, 0, 0.1, 0)
 ProgressBar.Position = UDim2.new(0.05, 0, 0.85, 0)
-ProgressBar.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+ProgressBar.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 ProgressBar.Parent = NotificationFrame
 
 -- Create the progress bar fill
