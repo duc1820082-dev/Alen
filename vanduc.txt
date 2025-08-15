@@ -182,7 +182,8 @@ local Main = Window:AddTab({
 	Icon = "rbxassetid://11963373994"
 })
 
-Window:AddSection({ Name = "Non Interactable", Tab = Player }) 	Title = "Toggle",
+Window:AddSection({ Name = "Non Interactable", Tab = Player }) 
+	Title = "Toggle",
 	Description = "Switching",
 	Tab = Player,
 	Callback = function(Boolean) 
@@ -200,13 +201,7 @@ Window:AddInput({
 }) 
 
 
-Window:AddParagraph({
-	Title = "Paragraph",
-	Description = "Insert any important text here.",
-	Tab = Player
-}) 
 
-Window:AddSection({ Name = "Interactable", Tab = Player }) 
 --// Tab [SETTINGS]
 local Keybind = nil
 local Settings = Window:AddTab({
