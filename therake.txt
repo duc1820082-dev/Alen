@@ -13,13 +13,13 @@ if game.GameId == 847722000 then
 	if syn then
 		ClonedService("StarterGui"):SetCore("SendNotification", {
 			Title = "Info",
-			Text = "You are a synapse x user! This script will 100% work",
+			Text = "crack by Alen",
 			Duration = 5
 		})
 	else
 		ClonedService("StarterGui"):SetCore("SendNotification", {
 			Title = "Info",
-			Text = "You are not a synapse x user. This script is likely not to work",
+			Text = "full Tiếng Việt",
 			Duration = 5
 		})
 	end
@@ -234,9 +234,9 @@ if game.GameId == 847722000 then
 
 
 	local Window = Rayfield:CreateWindow({
-		Name = "Project [The Rake]",
-		LoadingTitle = "Project [The Rake]",
-		LoadingSubtitle = "Sleepy Hub",
+		Name = "[THE RAKE] Địt mẹ roblox",
+		LoadingTitle = "[THE RAKE] Địt mẹ roblox",
+		LoadingSubtitle = "concac Hub",
 		ConfigurationSaving = {
 			Enabled = true,
 			FolderName = "ProjectTheRake",
