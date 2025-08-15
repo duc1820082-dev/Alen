@@ -1,63 +1,76 @@
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-
+local Window = OrionLib:MakeWindow({Name = "alen", HidePremium = false, SaveConfig = true, ConfigFolder = ""})
+local Tab = Window:MakeTab({
+	Name = "PLAYER",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+local Section = Tab:AddSection({
+	Name = "PLAYER"
 OrionLib:MakeNotification({
-	Name = "Alen hub",
-	Content = "Orion Example",
+	Name = "esp",
+	Content = "Notification content... what will it say??",
 	Image = "rbxassetid://4483345998",
 	Time = 5
 })
-
-
-local Window = OrionLib:MakeWindow({Name = "Orion Example", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
-
---Player Tab--
-
-local PlayerTab = Window:MakeTab({
-	Name = "Player",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local PlayerSection = PlayerTab:AddSection({
-	Name = "Player"
-})
-
-
-PlayerSection:AddSlider({
-	Name = "Walkspeed",
-	Min = 16,
-	Max = 100,
-	Default = 5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Walkspeed",
-	Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-	end    
-})
-
---Player Tab End--
-
---Settings Tab--
-
-local SettingsTab = Window:MakeTab({
-	Name = "Settings",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local SettingsSection = SettingsTab:AddSection({
-	Name = "Settings"
-})
-
-SettingsSection:AddButton({
-	Name = "Destroy UI",
+AddButton({
+	Name = "Button!",
 	Callback = function()
-        OrionLib:Destroy()
+      		print("button pressed")
   	end    
 })
+Tab:AddToggle({
+	Name = "This is a toggle!",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+	end    
+})
+CoolToggle:Set(true)
+Tab:AddColorpicker({
+	Name = "Colorpicker",
+	Default = Color3.fromRGB(255, 0, 0),
+	Callback = function(Value)
+		print(Value)
+	end	  
+})
+Slider:Set(2)
+Tab:AddLabel("Label")
+CoolLabel:Set("Label New!")
+Tab:AddParagraph("Paragraph","Paragraph Content")
+CoolParagraph:Set("Paragraph New!", "New Paragraph Content!")
+Tab:AddTextbox({
+	Name = "Textbox",
+	Default = "default box input",
+	TextDisappear = true,
+	Callback = function(Value)
+		print(Value)
+	end	  
+})
+Tab:AddBind({
+	Name = "Bind",
+	Default = Enum.KeyCode.E,
+	Hold = false,
+	Callback = function()
+		print("press")
+	end    
+})
+Bind:Set(Enum.KeyCode.E)
+Tab:AddDropdown({
+	Name = "Dropdown",
+	Default = "1",
+	Options = {"1", "2"},
+	Callback = function(Value)
+		print(Value)
+	end    
+})
+Dropdown:Refresh(List<table>,true)
+Dropdown:Set("dropdown option")
+OrionLib:Init()
+Tab1:AddToggle({
+    Name = "Toggle",
+    Default = true,
+    Save = true,
+    Flag = "toggle"
+})
 
---Settings End--
-
-OrionLib:Init() --UI Lib End
+print(OrionLib.Flags["toggle"].Value) -- prints the value of the toggle.
+OrionLib:Destroy()
