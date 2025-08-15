@@ -17,41 +17,65 @@ local function ClonedService(name)
 			Duration = 5
 		})
 	end
-local HidePart = Instance.new("Part")
-	HidePart.Size = Vector3.new(20,1000,20)
-	HidePart.Parent = ClonedService("Workspace")
-	HidePart.Position = Vector3.new(0,10000,0)
-	HidePart.Anchored = true
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-	local HidePartHightLight = Instance.new("Highlight")
-	HidePartHightLight.Name = "HidePartHightLight"
-	HidePartHightLight.FillColor = Color3.new(255,255,255)
-	HidePartHightLight.OutlineColor = Color3.new(170,0,0)
-	HidePartHightLight.FillTransparency = .8
-	HidePartHightLight.OutlineTransparency = .8
-	HidePartHightLight.Parent = HidePart
+OrionLib:MakeNotification({
+	Name = "Alen hub",
+	Content = "Orion Example",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
 
-	
-	local function getHum()
-		if ClonedService("Players").LocalPlayer and ClonedService("Players").LocalPlayer.Character and ClonedService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
-			return ClonedService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-		else
-			return false
-		end
-	end
-	
-	local function GET_HRP()
-		if not ClonedService("Players").LocalPlayer.Character then
 
-		else
-			if ClonedService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-				return ClonedService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-			end
-		end
-		return nil
-	end
+local Window = OrionLib:MakeWindow({Name = "Orion Example", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
 
-	local function SET_HRP_CFRAME(cframer : CFrame)
-		GET_HRP().CFrame = cframer	
-	end
+--Player Tab--
 
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerSection = PlayerTab:AddSection({
+	Name = "Player"
+})
+
+
+PlayerSection:AddSlider({
+	Name = "Walkspeed",
+	Min = 16,
+	Max = 100,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Walkspeed",
+	Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+--Player Tab End--
+
+--Settings Tab--
+
+local SettingsTab = Window:MakeTab({
+	Name = "Settings",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local SettingsSection = SettingsTab:AddSection({
+	Name = "Settings"
+})
+
+SettingsSection:AddButton({
+	Name = "Destroy UI",
+	Callback = function()
+        OrionLib:Destroy()
+  	end    
+})
+
+--Settings End--
+
+OrionLib:Init() --UI Lib End
