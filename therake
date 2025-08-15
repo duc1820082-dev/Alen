@@ -1263,4 +1263,4 @@ if game.GameId == 847722000 then
 
 
 	Rayfield:LoadConfiguration()
-end
+end 
