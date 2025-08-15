@@ -176,7 +176,22 @@ Window:AddKeybind({
 		warn("Key Set")
 	end,
 }) 
+local Main = Window:AddTab({
+	Title = "Player",
+	Section = "Player",
+	Icon = "rbxassetid://11963373994"
+})
 
+Window:AddSection({ Name = "Non Interactable", Tab = Player }) 
+
+
+Window:AddParagraph({
+	Title = "Paragraph",
+	Description = "Insert any important text here.",
+	Tab = Phayer
+}) 
+
+Window:AddSection({ Name = "Interactable", Tab = Player }) 
 --// Tab [SETTINGS]
 local Keybind = nil
 local Settings = Window:AddTab({
