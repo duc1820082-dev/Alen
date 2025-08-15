@@ -1,22 +1,4 @@
-local function ClonedService(name)
-		local Service = (game.GetService);
-		local Reference = (cloneref) or function(reference) return reference end
-		return Reference(Service(game, name));
-	end
 
-	if syn then
-		ClonedService("StarterGui"):SetCore("SendNotification", {
-			Title = "Info",
-			Text = "crack by Alen",
-			Duration = 5
-		})
-	else
-		ClonedService("StarterGui"):SetCore("SendNotification", {
-			Title = "Info",
-			Text = "full Tiếng Việt",
-			Duration = 5
-		})
-	end
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
