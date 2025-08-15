@@ -224,48 +224,4 @@ ClientTab:CreateToggle({
 			if _G.FreeCam == true then
 				pcall(function()
 
-					FreeCamPart.CFrame = ClonedService("Players").LocalPlayer.Character.Head.CFrame
-				end)
-				repeat wait()
-					pcall(function()
-						function tweenPart(time,partto,TSCF)
-							local tweenService = ClonedService("TweenService")
-							local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
-							local part = partto
-							local goal = {}
-							goal.CFrame = TSCF
-							local tween = tweenService:Create(part, tweenInfo, goal)
-							tween:Play()
-						end
-						ClonedService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Scriptable
-						local mouse = ClonedService("Players").LocalPlayer:GetMouse()
-						ClonedService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Anchored = true
-						ClonedService("Workspace").CurrentCamera.CameraSubject = FreeCamPart
-
-						FreeCamPart.CFrame = CFrame.new(FreeCamPart.Position,mouse.Hit.Position)
-						if InputService:IsKeyDown(Enum.KeyCode.Space) then
-							tweenPart(0.04,FreeCamPart,FreeCamPart.CFrame + Vector3.new(0,_G.FreeCamSpeed,0))
-							--FreeCamPart.CFrame = FreeCamPart.CFrame + Vector3.new(0,_G.FreeCamSpeed,0)
-						elseif InputService:IsKeyDown(Enum.KeyCode.LeftShift) then
-							tweenPart(0.04,FreeCamPart,FreeCamPart.CFrame + Vector3.new(0,-_G.FreeCamSpeed,0))
-							--FreeCamPart.CFrame = FreeCamPart.CFrame + Vector3.new(0,-_G.FreeCamSpeed,0)
-						end
-						if true then
-							if InputService:IsKeyDown(Enum.KeyCode.W) then
-								tweenPart(0.04,FreeCamPart,FreeCamPart.CFrame+FreeCamPart.CFrame.LookVector * _G.FreeCamSpeed)
-								-- FreeCamPart.CFrame = FreeCamPart.CFrame+FreeCamPart.CFrame.LookVector * _G.FreeCamSpeed
-							elseif InputService:IsKeyDown(Enum.KeyCode.S) then
-								tweenPart(0.04,FreeCamPart,FreeCamPart.CFrame+FreeCamPart.CFrame.LookVector * -_G.FreeCamSpeed)
-								-- FreeCamPart.CFrame = FreeCamPart.CFrame+FreeCamPart.CFrame.LookVector * -_G.FreeCamSpeed
-							end
-						end
-					end)
-				until _G.FreeCam == false
-				pcall(function()
-					ClonedService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = false
-					ClonedService("Workspace").CurrentCamera.CameraType = Enum.CameraType.Custom
-					ClonedService("Workspace").CurrentCamera.CameraSubject = ClonedService("Players").LocalPlayer.Character.Head
-				end)
-			end
-		end,
-	})
+	
