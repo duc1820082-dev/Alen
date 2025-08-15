@@ -17,4 +17,41 @@ local function ClonedService(name)
 			Duration = 5
 		})
 	end
+local HidePart = Instance.new("Part")
+	HidePart.Size = Vector3.new(20,1000,20)
+	HidePart.Parent = ClonedService("Workspace")
+	HidePart.Position = Vector3.new(0,10000,0)
+	HidePart.Anchored = true
+
+	local HidePartHightLight = Instance.new("Highlight")
+	HidePartHightLight.Name = "HidePartHightLight"
+	HidePartHightLight.FillColor = Color3.new(255,255,255)
+	HidePartHightLight.OutlineColor = Color3.new(170,0,0)
+	HidePartHightLight.FillTransparency = .8
+	HidePartHightLight.OutlineTransparency = .8
+	HidePartHightLight.Parent = HidePart
+
+	
+	local function getHum()
+		if ClonedService("Players").LocalPlayer and ClonedService("Players").LocalPlayer.Character and ClonedService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+			return ClonedService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+		else
+			return false
+		end
+	end
+	
+	local function GET_HRP()
+		if not ClonedService("Players").LocalPlayer.Character then
+
+		else
+			if ClonedService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+				return ClonedService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+			end
+		end
+		return nil
+	end
+
+	local function SET_HRP_CFRAME(cframer : CFrame)
+		GET_HRP().CFrame = cframer	
+	end
 
