@@ -215,15 +215,3 @@ local PlayerTab = Window:CreateTab("Player", 11252440515)
 	local ClientTab = Window:CreateTab("Troll", 4483345998)
 	local ExploitsTab = Window:CreateTab("SCRIPT", 11252440817)
 	local SettingsTab = Window:CreateTab("Settings", 11252440305)
-ClientTab:CreateToggle({
-		Name = "FreeCam",
-		CurrentValue = false,
-		Flag = "freeCam",
-		Callback = function(state)
-			_G.FreeCam = state
-			if _G.FreeCam == true then
-				pcall(function()
-FreeCamPart.CFrame = ClonedService("Players").LocalPlayer.Character.Head.CFrame
-				end)
-
-	
