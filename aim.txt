@@ -1,1 +1,254 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Camera = workspace.CurrentCamera
+local Lighting = game:GetService("Lighting")
+local LocalPlayer = Players.LocalPlayer
 
+local AimbotEnabled = false
+local TeamCheck = true
+local WallCheck = true
+local FullBright = false
+local Smoothness = 0.3
+local FOV = 80
+local MaxDistance = 500
+
+local OriginalBrightness = Lighting.Brightness
+local OriginalClockTime = Lighting.ClockTime
+local OriginalAmbient = Lighting.Ambient
+local OriginalFogEnd = Lighting.FogEnd
+
+local FOVCircle = Drawing.new("Circle")
+FOVCircle.Color = Color3.fromRGB(0, 255, 0)
+FOVCircle.Thickness = 2
+FOVCircle.NumSides = 64
+FOVCircle.Filled = false
+FOVCircle.Visible = true
+
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+ScreenGui.ResetOnSpawn = false
+
+local MainFrame = Instance.new("Frame", ScreenGui)
+MainFrame.Size = UDim2.new(0, 250, 0, 400)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -200)
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 1
+MainFrame.Active = true
+
+local TitleBar = Instance.new("Frame", MainFrame)
+TitleBar.Size = UDim2.new(1, 0, 0, 28)
+TitleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+local TitleText = Instance.new("TextLabel", TitleBar)
+TitleText.Size = UDim2.new(1, -10, 1, -4)
+TitleText.Position = UDim2.new(0, 5, 0, 2)
+TitleText.BackgroundTransparency = 1
+TitleText.Text = "AYKA SCRIPTS HUB"
+TitleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleText.TextSize = 16 -- menorzinho
+TitleText.Font = Enum.Font.SourceSansBold
+TitleText.TextScaled = false
+TitleText.TextWrapped = true
+TitleText.Active = false -- não bloqueia clique
+
+local Signature = Instance.new("TextLabel", MainFrame)
+Signature.Size = UDim2.new(1, -10, 0, 18)
+Signature.Position = UDim2.new(0, 5, 1, -20)
+Signature.BackgroundTransparency = 1
+Signature.Text = "By Ayka Scripts"
+Signature.TextColor3 = Color3.fromRGB(255, 255, 255)
+Signature.TextSize = 12
+Signature.Font = Enum.Font.SourceSansItalic
+Signature.TextXAlignment = Enum.TextXAlignment.Right
+
+-- Drag pelo TitleBar
+local dragging, dragInput, dragStart, startPos
+
+TitleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+TitleBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+local OpenButton = Instance.new("TextButton", ScreenGui)
+OpenButton.Size = UDim2.new(0, 100, 0, 30)
+OpenButton.Position = UDim2.new(0, 10, 0, 10)
+OpenButton.Text = "Abrir Menu"
+OpenButton.BackgroundColor3 = Color3.fromRGB(50, 150, 50)
+OpenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenButton.Visible = false
+
+local Scroll = Instance.new("ScrollingFrame", MainFrame)
+Scroll.Size = UDim2.new(1, -8, 1, -58)
+Scroll.Position = UDim2.new(0, 4, 0, 34)
+Scroll.CanvasSize = UDim2.new(0, 0, 0, 600)
+Scroll.ScrollBarThickness = 6
+Scroll.BackgroundTransparency = 1
+
+local function createButton(text, yPos)
+    local btn = Instance.new("TextButton", Scroll)
+    btn.Size = UDim2.new(1, -20, 0, 30)
+    btn.Position = UDim2.new(0, 10, 0, yPos)
+    btn.Text = text
+    btn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    return btn
+end
+
+local ToggleAimbot = createButton("Aimbot: OFF", 0)
+local ToggleTeam = createButton("TeamCheck: ON", 40)
+local ToggleWall = createButton("WallCheck: ON", 80)
+local SmoothnessButton = createButton("Suavidade: 0.3", 120)
+local FOVButton = createButton("FOV: 80", 160)
+local DistanceButton = createButton("Distância: 500", 200)
+local ToggleFullBright = createButton("FullBright: OFF", 240)
+local CloseButton = createButton("Fechar Menu", 280)
+CloseButton.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+
+ToggleAimbot.MouseButton1Click:Connect(function()
+    AimbotEnabled = not AimbotEnabled
+    ToggleAimbot.Text = "Aimbot: " .. (AimbotEnabled and "ON" or "OFF")
+end)
+
+ToggleTeam.MouseButton1Click:Connect(function()
+    TeamCheck = not TeamCheck
+    ToggleTeam.Text = "TeamCheck: " .. (TeamCheck and "ON" or "OFF")
+end)
+
+ToggleWall.MouseButton1Click:Connect(function()
+    WallCheck = not WallCheck
+    ToggleWall.Text = "WallCheck: " .. (WallCheck and "ON" or "OFF")
+end)
+
+ToggleFullBright.MouseButton1Click:Connect(function()
+    FullBright = not FullBright
+    ToggleFullBright.Text = "FullBright: " .. (FullBright and "ON" or "OFF")
+    if FullBright then
+        Lighting.Brightness = 5
+        Lighting.ClockTime = 14
+        Lighting.Ambient = Color3.new(1, 1, 1)
+        Lighting.FogEnd = 1e10
+    else
+        Lighting.Brightness = OriginalBrightness
+        Lighting.ClockTime = OriginalClockTime
+        Lighting.Ambient = OriginalAmbient
+        Lighting.FogEnd = OriginalFogEnd
+    end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    OpenButton.Visible = true
+end)
+
+OpenButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = true
+    OpenButton.Visible = false
+end)
+
+local function createInputButton(btn, varName, min, max)
+    local input
+    btn.MouseButton1Click:Connect(function()
+        if input then input:Destroy() end
+        input = Instance.new("TextBox", Scroll)
+        input.Size = btn.Size
+        input.Position = btn.Position
+        input.PlaceholderText = tostring(min).." ~ "..tostring(max)
+        input.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+        input.TextColor3 = Color3.fromRGB(255, 255, 255)
+        input.Text = tostring(_G[varName])
+        input:CaptureFocus()
+        input.FocusLost:Connect(function(enter)
+            if enter then
+                local v = tonumber(input.Text)
+                if v and v >= min and v <= max then
+                    _G[varName] = v
+                    if varName == "Smoothness" then
+                        Smoothness = v
+                        btn.Text = string.format("Suavidade: %.1f", Smoothness)
+                    elseif varName == "FOV" then
+                        FOV = v
+                        btn.Text = "FOV: " .. FOV
+                    elseif varName == "MaxDistance" then
+                        MaxDistance = v
+                        btn.Text = "Distância: " .. MaxDistance
+                    end
+                end
+                input:Destroy()
+                input = nil
+            end
+        end)
+    end)
+end
+
+_G.Smoothness = Smoothness
+_G.FOV = FOV
+_G.MaxDistance = MaxDistance
+
+createInputButton(SmoothnessButton, "Smoothness", 0.2, 1.0)
+createInputButton(FOVButton, "FOV", 0, 999)
+createInputButton(DistanceButton, "MaxDistance", 0, 999)
+
+RunService.RenderStepped:Connect(function()
+    FOVCircle.Position = Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
+    FOVCircle.Radius = FOV
+
+    local t = tick()
+    MainFrame.BorderColor3 = Color3.fromRGB(
+        math.abs(math.sin(t)) * 255,
+        math.abs(math.sin(t + 2)) * 255,
+        math.abs(math.sin(t + 4)) * 255
+    )
+
+    if AimbotEnabled then
+        local closest, shortest = nil, FOV
+        for _, player in pairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local hum = player.Character:FindFirstChild("Humanoid")
+                if hum and hum.Health > 0 then
+                    if TeamCheck and player.Team == LocalPlayer.Team then continue end
+                    local pos, onScreen = Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
+                    local dist2D = (Vector2.new(pos.X, pos.Y) - Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)).Magnitude
+                    local dist3D = (Camera.CFrame.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                    if onScreen and dist2D < shortest and dist3D <= MaxDistance then
+                        if WallCheck then
+                            local ray = Ray.new(Camera.CFrame.Position, (player.Character.HumanoidRootPart.Position - Camera.CFrame.Position).Unit * 500)
+                            local hit = workspace:FindPartOnRay(ray, LocalPlayer.Character, false, true)
+                            if hit and not hit:IsDescendantOf(player.Character) then continue end
+                        end
+                        shortest = dist2D
+                        closest = player
+                    end
+                end
+            end
+        end
+        if closest then
+            local pos = closest.Character.HumanoidRootPart.Position
+            Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position, pos), Smoothness)
+        end
+    end
+end)
