@@ -179,9 +179,6 @@ Window:AddKeybind({
 		warn("Key Set")
 	end,
 }) 
- 
-
-
 
 --// Tab [SETTINGS]
 local Keybind = nil
